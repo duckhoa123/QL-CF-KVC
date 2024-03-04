@@ -1,0 +1,843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<controllers>
+  <controller name="Item">
+    <actions>
+      <action name="Item">
+        <![CDATA[
+select * from items where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertItem">
+        <![CDATA[
+if exists(select 1 from items where ma_vt = @$ma_vt) begin
+  select 'Existed' as message
+  return
+end
+
+insert into items(ma_vt, ten_vt, mo_ta, sl_ton, gia_ban, ma_ncc, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_vt, @$ten_vt, @$mo_ta, @$sl_ton, @$gia_ban, @$ma_ncc, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from items where ma_vt = @$ma_vt
+]]>
+      </action>
+
+      <action name="EditItem">
+        <![CDATA[
+if @$ma_vt <> @$ma_vt_old and exists(select 1 from items where ma_vt = @$ma_vt) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from items where ma_vt = @$ma_vt_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update items set ma_vt = @$ma_vt, ten_vt = @$ten_vt, mo_ta = @$mo_ta, sl_ton = @$sl_ton, ma_ncc = @$ma_ncc, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_vt = @$ma_vt_old
+select * from items where ma_vt = @$ma_vt
+]]>
+      </action>
+
+      <action name="DeleteItem">
+        <![CDATA[
+delete items where ma_vt = @$ma_vt
+]]>
+      </action>
+
+      <action name="ItemByID">
+        <![CDATA[
+select * from items where ma_vt = @$ma_vt
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from items where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_vt like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Provider">
+    <actions>
+      <action name="Providers">
+        <![CDATA[
+select * from providers where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertProvider">
+        <![CDATA[
+if exists(select 1 from providers where ma_ncc = @$ma_ncc) begin
+  select 'Existed' as message
+  return
+end
+
+insert into providers(ma_ncc, ten_ncc, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_ncc, @$ten_ncc, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from providers where ma_ncc = @$ma_ncc
+]]>
+      </action>
+
+      <action name="EditProvider">
+        <![CDATA[
+if @$ma_ncc <> @$ma_ncc_old and exists(select 1 from providers where ma_ncc = @$ma_ncc) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from providers where ma_ncc = @$ma_ncc_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update providers set ma_ncc = @$ma_ncc, ten_ncc = @$ten_ncc, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_ncc = @$ma_ncc_old
+select * from providers where ma_ncc = @$ma_ncc
+]]>
+      </action>
+
+      <action name="DeleteProvider">
+        <![CDATA[
+delete providers where ma_ncc = @$ma_ncc
+]]>
+      </action>
+
+      <action name="ProviderByID">
+        <![CDATA[
+select * from providers where ma_ncc = @$ma_ncc
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from providers where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_ncc like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Material">
+    <actions>
+      <action name="Materials">
+        <![CDATA[
+select * from materials where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertMaterial">
+        <![CDATA[
+if exists(select 1 from materials where ma_vl = @$ma_vl) begin
+  select 'Existed' as message
+  return
+end
+
+insert into materials(ma_vl, ten_vl, ma_ncc, sl_ton, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_vl, @$ten_vl, @$ma_ncc, @$sl_ton, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from materials where ma_vl = @$ma_vl
+]]>
+      </action>
+
+      <action name="EditMaterial">
+        <![CDATA[
+if @$ma_vl <> @$ma_vl_old and exists(select 1 from materials where ma_vl = @$ma_vl) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from materials where ma_vl = @$ma_vl_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update materials set ma_vl = @$ma_vl, ten_vl = @$ten_vl, ma_ncc = @$ma_ncc, sl_ton = @$sl_ton, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_vl = @$ma_vl_old
+select * from materials where ma_vl = @$ma_vl
+]]>
+      </action>
+
+      <action name="DeleteMaterial">
+        <![CDATA[
+delete materials where ma_vl = @$ma_vl
+]]>
+      </action>
+
+      <action name="MaterialByID">
+        <![CDATA[
+select * from materials where ma_vl = @$ma_vl
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from materials where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_vl like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Employee">
+    <actions>
+      <action name="Employees">
+        <![CDATA[
+select * from employees where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertEmployee">
+        <![CDATA[
+if exists(select 1 from employees where ma_nv = @$ma_nv) begin
+  select 'Existed' as message
+  return
+end
+
+insert into employees(ma_nv, ten_nv, ngay_sinh, ngay_bd, gioi_tinh, muc_luong, nsd, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_nv, @$ten_nv, @$ngay_sinh, @$ngay_bd, @$gioi_tinh, @$muc_luong, @$nsd, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from employees where ma_nv = @$ma_nv
+]]>
+      </action>
+
+      <action name="EditEmployee">
+        <![CDATA[
+if @$ma_nv <> @$ma_nv_old and exists(select 1 from employees where ma_nv = @$ma_nv) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from employees where ma_nv = @$ma_nv_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update employees set ma_nv = @$ma_nv, ten_nv = @$ten_nv, ngay_sinh = @$ngay_sinh, ngay_bd = @$ngay_bd, gioi_tinh = @$gioi_tinh, muc_luong = @$muc_luong, nsd = @$nsd, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_nv = @$ma_nv_old
+select * from employees where ma_nv = @$ma_nv
+]]>
+      </action>
+
+      <action name="DeleteEmployee">
+        <![CDATA[
+delete employees where ma_nv = @$ma_nv
+]]>
+      </action>
+
+      <action name="EmployeeByID">
+        <![CDATA[
+select * from employees where ma_nv = @$ma_nv
+]]>
+      </action>
+      
+      <action name="Search">
+        <![CDATA[
+select * from employees where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_nv like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Table">
+    <actions>
+      <action name="Tables">
+        <![CDATA[
+select * from tables where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertTable">
+        <![CDATA[
+if exists(select 1 from tables where ma_ban = @$ma_ban) begin
+  select 'Existed' as message
+  return
+end
+
+insert into tables(ma_ban, ma_khu, ten_ban, size, tinh_trang, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_ban, @$ma_khu, @$ten_ban, @$size, @$tinh_trang, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from tables where ma_ban = @$ma_ban
+]]>
+      </action>
+
+      <action name="EditTable">
+        <![CDATA[
+if @$ma_ban <> @$ma_ban_old and exists(select 1 from tables where ma_ban = @$ma_ban) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from tables where ma_ban = @$ma_ban_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update tables set ma_ban = @$ma_ban, ma_khu = @$ma_khu, ten_ban = @$ten_ban, size = @$size, tinh_trang = @$tinh_trang, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_ban = @$ma_ban_old
+select * from tables where ma_ban = @$ma_ban
+]]>
+      </action>
+
+      <action name="DeleteTable">
+        <![CDATA[
+delete tables where ma_ban = @$ma_ban
+]]>
+      </action>
+
+      <action name="TableByID">
+        <![CDATA[
+select * from tables where ma_ban = @$ma_ban
+]]>
+      </action>
+
+      <action name="TTTable">
+        <![CDATA[
+select * from tables where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$tinh_trang = '*' or tinh_trang = @$tinh_trang)
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from tables where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_ban like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Place">
+    <actions>
+      <action name="Places">
+        <![CDATA[
+select * from places where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertPlace">
+        <![CDATA[
+if exists(select 1 from places where ma_khu = @$ma_khu) begin
+  select 'Existed' as message
+  return
+end
+
+insert into places(ma_khu, ten_khu, tinh_trang, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_khu, @$ten_khu, @$tinh_trang, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from places where ma_khu = @$ma_khu
+]]>
+      </action>
+
+      <action name="EditPlace">
+        <![CDATA[
+if @$ma_khu <> @$ma_khu_old and exists(select 1 from places where ma_khu = @$ma_khu) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from places where ma_khu = @$ma_khu_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update places set ma_khu = @$ma_khu, ten_khu = @$ten_khu, tinh_trang = @$tinh_trang, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_khu = @$ma_khu_old
+select * from places where ma_khu = @$ma_khu
+]]>
+      </action>
+
+      <action name="DeletePlace">
+        <![CDATA[
+delete places where ma_khu = @$ma_khu
+]]>
+      </action>
+
+      <action name="PlaceByID">
+        <![CDATA[
+select * from places where ma_khu = @$ma_khu
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from places where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_khu like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Order">
+    <actions>
+      <action name="Orders">
+        <![CDATA[
+select * from orders where xtype = @$xtype and (@$trang_thai = '*' or trang_thai = @$trang_thai)
+]]>
+      </action>
+
+      <action name="InsertOrder">
+        <![CDATA[
+insert into orders(ngay_lap, ten_khach, sdt_khach, ma_ban, ghi_chu, xtype, so_luong, tien_hang, khuyen_mai, tien_thue, tong_tien, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ngay_lap, @$ten_khach, @$sdt_khach, @$ma_ban, @$ghi_chu, @$xtype, @$so_luong, @$tien_hang, @$khuyen_mai, @$tien_thue, @$tong_tien, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+
+select @$ma_dh = @@IDENTITY
+update @$Detail set ma_dh = @$ma_dh
+insert into ordersdetail(ma_dh, stt, ma_vt, so_luong, tien_hang, khuyen_mai, tien_thue, tong_tien) select @$ma_dh, stt, ma_vt, so_luong, tien_hang, khuyen_mai, tien_thue, tong_tien from @$Detail
+
+
+select * from orders where ma_dh = @$ma_dh
+select * from ordersdetail where ma_dh = @$ma_dh order by stt
+if @$trang_thai in ('0', '1') and @$ma_ban <> '' update [tables] set tinh_trang = '3' where ma_ban = @$ma_ban
+--Cập nhật số lượng tồn kho
+--update items set sl_ton = sl_ton - d.so_luong from items i join @$Detail d on i.ma_vt = d.ma_vt
+]]>
+      </action>
+
+      <action name="EditOrder">
+        <![CDATA[
+if @$ma_dh <> @$ma_dh_old and exists(select 1 from orders where ma_dh = @$ma_dh) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from orders where ma_dh = @$ma_dh_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update @$Detail set ma_dh = @$ma_dh
+delete ordersdetail where ma_dh = @$ma_dh_old
+
+update orders set ngay_lap = @$ngay_lap, ten_khach = @$ten_khach, sdt_khach = @$sdt_khach, ma_ban = @$ma_ban, ghi_chu = @$ghi_chu, so_luong = @$so_luong, tien_hang = @$tien_hang, khuyen_mai = @$khuyen_mai, tien_thue = @$tien_thue, tong_tien = @$tong_tien, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_dh = @$ma_dh_old
+insert into ordersdetail(ma_dh, stt, ma_vt, so_luong, tien_hang, khuyen_mai, tien_thue, tong_tien) select @$ma_dh, stt, ma_vt, so_luong, tien_hang, khuyen_mai, tien_thue, tong_tien from @$Detail
+
+select * from orders where ma_dh = @$ma_dh
+select * from ordersdetail where ma_dh = @$ma_dh order by stt
+
+if @$trang_thai in ('0', '1') @$ma_ban <> '' update [tables] set tinh_trang = '3' where ma_ban = @$ma_ban
+if @$trang_thai in ('2', '3', '4') @$ma_ban <> '' update [tables] set tinh_trang = '0' where ma_ban = @$ma_ban
+--Cập nhật số lượng tồn kho
+--update items set sl_ton = sl_ton - d.so_luong from items i join @$Detail d on i.ma_vt = d.ma_vt
+]]>
+      </action>
+
+      <action name="DeleteOrder">
+        <![CDATA[
+delete orders where ma_dh = @$ma_dh
+delete ordersdetail where ma_dh = @$ma_dh
+]]>
+      </action>
+
+      <action name="OrderByID">
+        <![CDATA[
+select * from orders where ma_dh = @$ma_dh
+select * from ordersdetail where ma_dh = @$ma_dh
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from orders where xtype = @$xtype and (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_khach like N'%' + @$search_text + N'%' or ma_ban like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Broken">
+    <actions>
+      <action name="Brokens">
+        <![CDATA[
+select * from brokens where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertBroken">
+        <![CDATA[
+insert into brokens(ngay_lap, ghi_chu, so_luong, tong_tien, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ngay_lap, @$ghi_chu, @$so_luong, @$tong_tien, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+
+select @$ma_ph = @@IDENTITY
+update @$Detail set ma_ph = @$ma_ph
+insert into brokensdetail(ma_ph, stt, ma_vt, so_luong, ly_do, ghi_chu, tong_tien) select @$ma_ph, stt, ma_vt, so_luong, ly_do, ghi_chu, tong_tien from @$Detail
+
+
+select * from brokens where ma_ph = @$ma_ph
+select * from brokensdetail where ma_ph = @$ma_ph order by stt
+]]>
+      </action>
+
+      <action name="EditBroken">
+        <![CDATA[
+if @$ma_ph <> @$ma_ph_old and exists(select 1 from brokens where ma_ph = @$ma_ph) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from brokens where ma_ph = @$ma_ph_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update @$Detail set ma_ph = @$ma_ph
+delete brokensdetail where ma_ph = @$ma_ph_old
+
+update brokens set ngay_lap = @$ngay_lap, ghi_chu = @$ghi_chu, so_luong = @$so_luong, tong_tien = @$tong_tien, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_ph = @$ma_ph_old
+insert into brokensdetail(ma_ph, stt, ma_vt, so_luong, ly_do, ghi_chu, tong_tien) select @$ma_ph, stt, ma_vt, so_luong, ly_do, ghi_chu, tong_tien from @$Detail
+
+select * from brokens where ma_ph = @$ma_ph
+select * from brokensdetail where ma_ph = @$ma_ph order by stt
+]]>
+      </action>
+
+      <action name="DeleteBroken">
+        <![CDATA[
+delete brokens where ma_ph = @$ma_ph
+delete brokensdetail where ma_ph = @$ma_ph
+]]>
+      </action>
+
+      <action name="BrokenByID">
+        <![CDATA[
+select * from brokens where ma_ph = @$ma_ph
+select * from brokensdetail where ma_ph = @$ma_ph
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from brokens where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ghi_chu like N'%' + @$search_text + N'%' or ma_ph like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Check">
+    <actions>
+      <action name="Checks">
+        <![CDATA[
+select * from checks where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertCheck">
+        <![CDATA[
+insert into checks(ngay_lap, ghi_chu, so_luong1, tong_tien1, so_luong2, tong_tien2, so_luong3, tong_tien3, so_luong4, tong_tien4, full_quality, poor_quality, loss_quality, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ngay_lap, @$ghi_chu, @$so_luong1, @$tong_tien1, @$so_luong2, @$tong_tien2, @$so_luong3, @$tong_tien3, @$so_luong4, @$tong_tien4, @$full_quality, @$poor_quality, @$loss_quality, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+
+select @$ma_ph = @@IDENTITY
+update @$Detail set ma_ph = @$ma_ph
+insert into checksdetail(ma_ph, stt, ma_vt, so_luong1, tong_tien1, so_luong2, tong_tien2, so_luong3, tong_tien3, so_luong4, tong_tien4, full_quality, poor_quality, loss_quality) select @$ma_ph, stt, ma_vt, so_luong1, tong_tien1, so_luong2, tong_tien2, so_luong3, tong_tien3, so_luong4, tong_tien4, full_quality, poor_quality, loss_quality from @$Detail
+
+
+select * from checks where ma_ph = @$ma_ph
+select * from checksdetail where ma_ph = @$ma_ph order by stt
+]]>
+      </action>
+
+      <action name="EditCheck">
+        <![CDATA[
+if @$ma_ph <> @$ma_ph_old and exists(select 1 from checks where ma_ph = @$ma_ph) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from checks where ma_ph = @$ma_ph_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update @$Detail set ma_ph = @$ma_ph
+delete checksdetail where ma_ph = @$ma_ph_old
+
+update checks set ngay_lap = @$ngay_lap, ghi_chu = @$ghi_chu, so_luong1 = @$so_luong1, tong_tien1 = @$tong_tien1, so_luong2 = @$so_luong2, tong_tien2 = @$tong_tien2, so_luong3 = @$so_luong3, tong_tien3 = @$tong_tien3, so_luong4 = @$so_luong4, tong_tien4 = @$tong_tien4, full_quality = @$full_quality, poor_quality = @$poor_quality, loss_quality = @$loss_quality, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_ph = @$ma_ph_old
+insert into checksdetail(ma_ph, stt, ma_vt, so_luong1, tong_tien1, so_luong2, tong_tien2, so_luong3, tong_tien3, so_luong4, tong_tien4, full_quality, poor_quality, loss_quality) select @$ma_ph, stt, ma_vt, so_luong1, tong_tien1, so_luong2, tong_tien2, so_luong3, tong_tien3, so_luong4, tong_tien4, full_quality, poor_quality, loss_quality from @$Detail
+
+select * from checks where ma_ph = @$ma_ph
+select * from checksdetail where ma_ph = @$ma_ph order by stt
+]]>
+      </action>
+
+      <action name="DeleteCheck">
+        <![CDATA[
+delete checks where ma_ph = @$ma_ph
+delete checksdetail where ma_ph = @$ma_ph
+]]>
+      </action>
+
+      <action name="CheckByID">
+        <![CDATA[
+select * from checks where ma_ph = @$ma_ph
+select * from checksdetail where ma_ph = @$ma_ph
+]]>
+      </action>
+      
+      <action name="Search">
+        <![CDATA[
+select * from checks where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ghi_chu like N'%' + @$search_text + N'%' or ma_ph like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Revenue">
+    <actions>
+      <action name="Filter">
+        <![CDATA[
+declare @dfrom date, @dto date
+select @dfrom = @$from_date, @dto = @$to_date
+select ma_dh, ten_khach, sdt_khach, ghi_chu, so_luong, tien_hang, khuyen_mai, tien_thue, tong_tien, trang_thai into #orders from orders where ngay_lap between @dfrom and @dto and (@$xtype = '*' or xtype = @$xtype)
+select * from #orders order by ma_dh
+select sum(isnull(so_luong, 0)) as so_luong, sum(isnull(tien_hang,0)) as tien_hang, sum(isnull(khuyen_mai,0)) as khuyen_mai, sum(isnull(tien_thue,0)) as tien_thue, sum(isnull(tong_tien,0)) as tong_tien from #orders
+drop table #orders
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Quantity">
+    <actions>
+      <action name="Filter">
+        <![CDATA[
+declare @dfrom date, @dto date
+select @dfrom = @$from_date, @dto = @$to_date
+select ma_dh, ngay_lap, xtype, so_luong, trang_thai into #orders from orders where ngay_lap between @dfrom and @dto and (@$xtype = '*' or xtype = @$xtype)
+select * from #orders order by ma_dh
+select sum(isnull(so_luong, 0)) as so_luong from #orders
+drop table #orders
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Site">
+    <actions>
+      <action name="Filter">
+        <![CDATA[
+declare @dfrom datetime, @dto datetime
+select @dfrom = @$from_date, @dto = @$to_date
+select * into #items from items where ngay_tao between @dfrom and @dto
+if @$trang_thai <> '*' delete #items where trang_thai <> @$trang_thai
+if @$ma_ncc <> '*' delete #items where ma_ncc <> @$ma_ncc
+if @$type = '0' delete #items where ma_vt not in(select top 1 ma_vt from ordersdetail a left join orders b on a.ma_dh = b.ma_dh where b.ngay_lap between @dfrom and @dto order by a.so_luong desc)
+if @$type = '1' delete #items where ma_vt not in(select top 1 ma_vt from #items order by sl_ton desc)
+select * from #items order by ma_vt
+select sum(isnull(sl_ton, 0)) as sl_ton from #items
+drop table #items
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="System">
+    <actions>
+      <action name="Login">
+        <![CDATA[
+select * from users where username = @$username and password = @$password and trang_thai = '1'
+]]>
+      </action>
+
+      <action name="ChangePassword">
+        <![CDATA[
+if not exists(select 1 from users where id = @@userID and password = @$old_pass) begin
+  select N'Mật khẩu cũ không đúng' as message
+  return
+end
+
+update users set password = @$new_pass where id = @@userID
+select '' as message
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Ticket">
+    <actions>
+      <action name="Tickets">
+        <![CDATA[
+select * from orders where xtype = '1' and (@$trang_thai = '*' or trang_thai = @$trang_thai)
+]]>
+      </action>
+
+      <action name="InsertTicket">
+        <![CDATA[
+insert into orders(ngay_lap, ten_khach, sdt_khach, ghi_chu, so_luong, tien_hang, khuyen_mai, tien_thue, tong_tien, xtype, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select getdate(), @$ten_khach, @$sdt_khach, @$ghi_chu, @$so_luong, @$tong_tien, 0, 0, @$tong_tien, @$xtype, '2', getdate(), getdate(), @@userID, @@userID
+
+select @$ma_dh = @@IDENTITY
+
+select * from orders where ma_dh = @$ma_dh
+]]>
+      </action>
+
+    </actions>
+  </controller>
+
+  <controller name="BookType">
+    <actions>
+      <action name="BookTypes">
+        <![CDATA[
+select * from booktypes where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertBookType">
+        <![CDATA[
+if exists(select 1 from booktypes where ma_loai_sach = @$ma_loai_sach) begin
+  select 'Existed' as message
+  return
+end
+
+insert into booktypes(ma_loai_sach, ten_loai_sach, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_loai_sach, @$ten_loai_sach, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from booktypes where ma_loai_sach = @$ma_loai_sach
+]]>
+      </action>
+
+      <action name="EditBookType">
+        <![CDATA[
+if @$ma_loai_sach <> @$ma_loai_sach_old and exists(select 1 from booktypes where ma_loai_sach = @$ma_loai_sach) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from booktypes where ma_loai_sach = @$ma_loai_sach_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update booktypes set ma_loai_sach = @$ma_loai_sach, ten_loai_sach = @$ten_loai_sach, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_loai_sach = @$ma_loai_sach_old
+select * from booktypes where ma_loai_sach = @$ma_loai_sach
+]]>
+      </action>
+
+      <action name="DeleteBookType">
+        <![CDATA[
+delete booktypes where ma_loai_sach = @$ma_loai_sach
+]]>
+      </action>
+
+      <action name="BookTypeByID">
+        <![CDATA[
+select * from booktypes where ma_loai_sach = @$ma_loai_sach
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from booktypes where (@$search_text = '' or ten_loai_sach like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="Book">
+    <actions>
+      <action name="Books">
+        <![CDATA[
+select * from books where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+      
+      <action name="BooksAsItems">
+        <![CDATA[
+select ma_sach as ma_vt, ten_sach as ten_vt, * from books where @$trang_thai = '*' or trang_thai = @$trang_thai
+]]>
+      </action>
+
+      <action name="InsertBook">
+        <![CDATA[
+if exists(select 1 from books where ma_sach = @$ma_sach) begin
+  select 'Existed' as message
+  return
+end
+
+insert into books(ma_sach, ten_sach, ma_loai_sach, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$ma_sach, @$ten_sach, @$ma_loai_sach, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select * from books where ma_sach = @$ma_sach
+]]>
+      </action>
+
+      <action name="EditBook">
+        <![CDATA[
+if @$ma_sach <> @$ma_sach_old and exists(select 1 from books where ma_sach = @$ma_sach) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from books where ma_sach = @$ma_sach_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update books set ma_sach = @$ma_sach, ten_sach = @$ten_sach, ma_loai_sach = @$ma_loai_sach, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where ma_sach = @$ma_sach_old
+select * from books where ma_sach = @$ma_sach
+]]>
+      </action>
+
+      <action name="DeleteBook">
+        <![CDATA[
+delete books where ma_sach = @$ma_sach
+]]>
+      </action>
+
+      <action name="BookByID">
+        <![CDATA[
+select * from books where ma_sach = @$ma_sach
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from books where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or ten_sach like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="User">
+    <actions>
+      <action name="Users">
+        <![CDATA[
+select * from users where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@@admin = 1 or admin = 0) and (@@manager = 1 or manager = 0)
+]]>
+      </action>
+
+      <action name="InsertUser">
+        <![CDATA[
+if exists(select 1 from users where id = @$id or username = @$username) begin
+  select 'Existed' as message
+  return
+end
+
+insert into users(username, full_name, password, admin, manager, trang_thai, ngay_tao, ngay_sua, nguoi_tao, nguoi_sua) select @$username, @$full_name, @$password, @$admin, @$manager, @$trang_thai, getdate(), getdate(), @@userID, @@userID
+select @$id = @@IDENTITY
+select * from users where id = @$id
+]]>
+      </action>
+
+      <action name="EditUser">
+        <![CDATA[
+if @$id <> @$id_old and exists(select 1 from users where id = @$id or username = @$username) begin
+  select 'Existed' as message
+  return
+end
+
+if not exists(select 1 from users where id = @$id_old and ngay_sua = @$ngay_sua_old) begin
+  select 'Edited' as message
+  return
+end
+
+update users set username = @$username, full_name = @$full_name, password = @$password, admin = @$admin, manager = @$manager, trang_thai = @$trang_thai, ngay_sua = getdate(), nguoi_sua = @@userID where id = @$id_old
+select * from users where id = @$id
+]]>
+      </action>
+
+      <action name="DeleteUser">
+        <![CDATA[
+delete users where id = @$id
+]]>
+      </action>
+
+      <action name="UserByID">
+        <![CDATA[
+select * from users where id = @$id
+]]>
+      </action>
+
+      <action name="Search">
+        <![CDATA[
+select * from users where (@$trang_thai = '*' or trang_thai = @$trang_thai) and (@$search_text = '' or full_name like N'%' + @$search_text + N'%')
+]]>
+      </action>
+    </actions>
+  </controller>
+
+  <controller name="BookReport">
+    <actions>
+      <action name="Filter">
+        <![CDATA[
+declare @dfrom date, @dto date
+select @dfrom = @$from_date, @dto = @$to_date
+select b.ma_sach, ten_sach, ma_loai_sach, b.trang_thai, sum(o.so_luong) as da_thue into #books from books b join ordersdetail o on b.ma_sach = o.ma_vt where b.ngay_tao between @dfrom and @dto and (@$ma_loai_sach = '*' or b.ma_loai_sach = @$ma_loai_sach) group by b.ma_sach, b.ten_sach, b.ma_loai_sach, b.trang_thai
+select * from #books order by ma_sach
+drop table #books
+]]>
+      </action>
+    </actions>
+  </controller>
+</controllers>

@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E58536BA-DFCF-4CD7-B32A-9BE6BE835235}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>QL_COFFE_KVC</RootNamespace>
+    <AssemblyName>QL_COFFE_KVC</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\DataRowArgs.cs" />
+    <Compile Include="Classes\DataSetArgs.cs" />
+    <Compile Include="Classes\FormAction.cs" />
+    <Compile Include="Classes\Param.cs" />
+    <Compile Include="Classes\QueryManager.cs" />
+    <Compile Include="Classes\UserInfo.cs" />
+    <Compile Include="DataModel\SiteReportFilter.cs" />
+    <Compile Include="DataModel\BookStatusDataSource.cs" />
+    <Compile Include="DataModel\BrokenStatusDataSource.cs" />
+    <Compile Include="DataModel\ServiceDataSource.cs" />
+    <Compile Include="DataModel\AvaiablePlaceDataSource.cs" />
+    <Compile Include="DataModel\SexDataSource.cs" />
+    <Compile Include="DataModel\AvaiableTableDataSource.cs" />
+    <Compile Include="DataModel\OrderStatusDataSource.cs" />
+    <Compile Include="DataModel\StatusDataSource.cs" />
+    <Compile Include="Views\Forms\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\FormBase.Designer.cs">
+      <DependentUpon>FormBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\BookTypeInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\BookTypeInput.Designer.cs">
+      <DependentUpon>BookTypeInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\BookInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\BookInput.Designer.cs">
+      <DependentUpon>BookInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\CheckDetailInput.Designer.cs">
+      <DependentUpon>CheckDetailInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\BrokenDetailInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\BrokenDetailInput.Designer.cs">
+      <DependentUpon>BrokenDetailInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\CheckInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\CheckInput.Designer.cs">
+      <DependentUpon>CheckInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\BrokenInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\BrokenInput.Designer.cs">
+      <DependentUpon>BrokenInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\ChangePasswordInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\CheckDetailInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\ChangePasswordInput.Designer.cs">
+      <DependentUpon>ChangePasswordInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\RentBookDetailInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\RentBookDetailInput.Designer.cs">
+      <DependentUpon>RentBookDetailInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\RentBookInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\RentBookInput.Designer.cs">
+      <DependentUpon>RentBookInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\UserInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\UserInput.Designer.cs">
+      <DependentUpon>UserInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\TicketInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\TicketInput.Designer.cs">
+      <DependentUpon>TicketInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\OrderDetailInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\OrderDetailInput.Designer.cs">
+      <DependentUpon>OrderDetailInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\MaterialInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\MaterialInput.Designer.cs">
+      <DependentUpon>MaterialInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\EmployeeInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\EmployeeInput.Designer.cs">
+      <DependentUpon>EmployeeInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\OrderInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\OrderInput.Designer.cs">
+      <DependentUpon>OrderInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\PlaceInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\PlaceInput.Designer.cs">
+      <DependentUpon>PlaceInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\TableInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\TableInput.Designer.cs">
+      <DependentUpon>TableInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\ProviderInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\ProviderInput.Designer.cs">
+      <DependentUpon>ProviderInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inputs\ItemInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inputs\ItemInput.Designer.cs">
+      <DependentUpon>ItemInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modules\FormBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormBookTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormBookReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormBookReport.Designer.cs">
+      <DependentUpon>FormBookReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modules\FormBrokens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormChecks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormQuantity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormQuantity.Designer.cs">
+      <DependentUpon>FormQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modules\FormRentBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormSite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormSite.Designer.cs">
+      <DependentUpon>FormSite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modules\FormMaterials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormPlaces.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormRevenue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormRevenue.Designer.cs">
+      <DependentUpon>FormRevenue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modules\FormTables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormProviders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\ControlExtension.cs" />
+    <Compile Include="Helpers\DataCenter.cs" />
+    <Compile Include="Helpers\Alert.cs" />
+    <Compile Include="Helpers\ForLoop.cs" />
+    <Compile Include="Helpers\SqlUtils.cs" />
+    <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\XmlUtils.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Modules\FormTickets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\FormTickets.Designer.cs">
+      <DependentUpon>FormTickets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modules\FormUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="Views\Forms\FormBase.resx">
+      <DependentUpon>FormBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\BookTypeInput.resx">
+      <DependentUpon>BookTypeInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\BookInput.resx">
+      <DependentUpon>BookInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\CheckDetailInput.resx">
+      <DependentUpon>CheckDetailInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\BrokenDetailInput.resx">
+      <DependentUpon>BrokenDetailInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\CheckInput.resx">
+      <DependentUpon>CheckInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\BrokenInput.resx">
+      <DependentUpon>BrokenInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\ChangePasswordInput.resx">
+      <DependentUpon>ChangePasswordInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\RentBookDetailInput.resx">
+      <DependentUpon>RentBookDetailInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\RentBookInput.resx">
+      <DependentUpon>RentBookInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\UserInput.resx">
+      <DependentUpon>UserInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\TicketInput.resx">
+      <DependentUpon>TicketInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\OrderDetailInput.resx">
+      <DependentUpon>OrderDetailInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\MaterialInput.resx">
+      <DependentUpon>MaterialInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\EmployeeInput.resx">
+      <DependentUpon>EmployeeInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\OrderInput.resx">
+      <DependentUpon>OrderInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\PlaceInput.resx">
+      <DependentUpon>PlaceInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\TableInput.resx">
+      <DependentUpon>TableInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\ProviderInput.resx">
+      <DependentUpon>ProviderInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inputs\ItemInput.resx">
+      <DependentUpon>ItemInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormBooks.resx">
+      <DependentUpon>FormBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormBookTypes.resx">
+      <DependentUpon>FormBookTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormBookReport.resx">
+      <DependentUpon>FormBookReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormBrokens.resx">
+      <DependentUpon>FormBrokens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormChecks.resx">
+      <DependentUpon>FormChecks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormQuantity.resx">
+      <DependentUpon>FormQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormRentBook.resx">
+      <DependentUpon>FormRentBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormSite.resx">
+      <DependentUpon>FormSite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormMaterials.resx">
+      <DependentUpon>FormMaterials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormEmployees.resx">
+      <DependentUpon>FormEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormOrders.resx">
+      <DependentUpon>FormOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormPlaces.resx">
+      <DependentUpon>FormPlaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormRevenue.resx">
+      <DependentUpon>FormRevenue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormTables.resx">
+      <DependentUpon>FormTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormProviders.resx">
+      <DependentUpon>FormProviders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormItems.resx">
+      <DependentUpon>FormItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\Modules\FormTickets.resx">
+      <DependentUpon>FormTickets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\FormUsers.resx">
+      <DependentUpon>FormUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Queries.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
